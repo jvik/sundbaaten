@@ -10,7 +10,9 @@ rp(url)
 			return [Number(key), outputInfo[key]]
 		});
 		// console.log($("#hverdager > tbody", html).length);
-		
+		result.forEach(element => {
+			
+		});
 		// console.log(weekdayDepartures.toString());
 		console.log(result)
 	})
