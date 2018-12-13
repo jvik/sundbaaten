@@ -1,0 +1,10 @@
+version: '2'
+services:
+  sundbaat-scraper:
+    container_name: sundbaat-scraper
+    image: jvik/sundbaat-scraper
+    restart: always
+    ports: 
+      - 4005:4005
+    volumes:
+      - ./src:/app/src
