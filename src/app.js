@@ -6,14 +6,15 @@ const port = 4005
 const rp = require("request-promise");
 const $ = require("cheerio");
 const url = "https://www.sundbaten.no/";
-var departures = { 
-	weekdayDepartures: [],
-	saturdayDepartures: [],
-	sundayDepartures: []
-};
 
-const test = rp(url)
+const scraper = rp(url)
 	.then(function(html){
+		let departures = { 
+			weekdayDepartures: [],
+			saturdayDepartures: [],
+			sundayDepartures: []
+		};
+
 		const weekdaySelector = $("#hverdager > tbody > tr > td", html)
 		for (let i = 0; i < weekdaySelector.length; i++) {
 			let departureSite = weekdaySelector[i].attribs["data-label"]
@@ -46,12 +47,14 @@ const test = rp(url)
 		
 		const jsonStringedDepartures = JSON.parse(JSON.stringify(departures))
 		return jsonStringedDepartures
+	}).catch(function (err) {
+		throw new Error(err);
 	});
 
 app.set("json spaces", 2)
 
 app.get('/', async (req, res) => 
-	await res.json(test)
+	await res.json(await scraper)
 )
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
