@@ -8,7 +8,7 @@ $ npm start
 
 If you have docker-compose installed you can use 
 ```shell
-docker build -t jvik/sundbaat-scraper .
+$ docker build -t jvik/sundbaat-scraper .
 ```
 Thereafter
 ```shell
