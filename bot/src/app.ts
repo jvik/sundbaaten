@@ -1,7 +1,6 @@
-import express from 'express';
+var SlackBot = require('slackbots');
 import dotenv from 'dotenv';
-
-const app = express();
+import { getWeekDay } from './parser';
 
 var IN_PROD = false;
 
@@ -22,11 +21,30 @@ if (IN_PROD) {
 	});
 }
 
-app.get('/', (req, res) => {
-	res.send('Hello world!');
+var bot = new SlackBot({
+	token: `${process.env.API_KEY}`,
+	name: 'sundboten',
 });
 
-// start the Express server
-app.listen({ port: `${process.env.APP_PORT}` }, () => {
-	console.log(`🚀 Server ready at http://localhost:${process.env.APP_PORT}`);
+bot.on('start', function() {
+	bot.postMessageToChannel('slackbot-test', 'Eat lulz');
 });
+
+bot.on('error', err => console.log(err));
+
+bot.on('message', data => {
+	if (data.type !== 'message') {
+		return;
+	}
+	handleMessage(data.text);
+	console.log(data);
+});
+
+function handleMessage(message) {
+	if (message.includes(' hello')) {
+		bot.postMessageToChannel('slackbot-test', 'hehehe');
+	}
+	if (message.includes('ukedag')) {
+		bot.postMessageToChannel('slackbot-test', getWeekDay());
+	}
+}
