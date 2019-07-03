@@ -1,6 +1,6 @@
 var SlackBot = require('slackbots');
 import dotenv from 'dotenv';
-import { getWeekDay, getTime } from './parser';
+import utils from './utils/utils';
 
 var IN_PROD = false;
 
@@ -27,7 +27,7 @@ var bot = new SlackBot({
 });
 
 bot.on('start', function() {
-	bot.postMessageToChannel('slackbot-test', 'Eat lulz');
+	bot.postMessageToChannel('slackbot-test', 'Hello');
 });
 
 bot.on('error', err => console.log(err));
@@ -45,9 +45,9 @@ function handleMessage(message) {
 		bot.postMessageToChannel('slackbot-test', 'hehehe');
 	}
 	if (message.includes('ukedag')) {
-		bot.postMessageToChannel('slackbot-test', getWeekDay());
+		bot.postMessageToChannel('slackbot-test', utils.getWeekDay());
 	}
 	if (message.includes('klokkeslett')) {
-		bot.postMessageToChannel('slackbot-test', getTime());
+		bot.postMessageToChannel('slackbot-test', utils.getTime());
 	}
 }
