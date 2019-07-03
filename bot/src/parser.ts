@@ -13,3 +13,14 @@ export function getWeekDay() {
 
 	return dateToday;
 }
+
+export function getTime() {
+	const dateToday = new Date();
+	const timeNow =
+		dateToday.getHours() +
+		':' +
+		dateToday.getMinutes() +
+		':' +
+		dateToday.getSeconds();
+	return timeNow;
+}

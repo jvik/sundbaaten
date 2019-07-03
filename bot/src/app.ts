@@ -1,6 +1,6 @@
 var SlackBot = require('slackbots');
 import dotenv from 'dotenv';
-import { getWeekDay } from './parser';
+import { getWeekDay, getTime } from './parser';
 
 var IN_PROD = false;
 
@@ -46,5 +46,8 @@ function handleMessage(message) {
 	}
 	if (message.includes('ukedag')) {
 		bot.postMessageToChannel('slackbot-test', getWeekDay());
+	}
+	if (message.includes('klokkeslett')) {
+		bot.postMessageToChannel('slackbot-test', getTime());
 	}
 }
