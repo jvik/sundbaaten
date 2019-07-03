@@ -16,11 +16,6 @@ export function getWeekDay() {
 
 export function getTime() {
 	const dateToday = new Date();
-	const timeNow =
-		dateToday.getHours() +
-		':' +
-		dateToday.getMinutes() +
-		':' +
-		dateToday.getSeconds();
+	const timeNow = dateToday.getHours() + ':' + dateToday.getMinutes();
 	return timeNow;
 }
