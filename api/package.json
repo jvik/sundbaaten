@@ -9,8 +9,7 @@
 		"dev:server": "npm run build:server:once && npm-run-all --parallel nodemon:prod watch:server",
 		"watch:server": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
 		"nodemon:prod": "cross-env NODE_ENV=development nodemon --watch ./dist/main.bundle.js",
-		"docker:build:dev": "docker build -t boilerplatedev . -f Dockerfile.dev",
-		"docker:build:prod": "docker build -t boilerplateprod . -f Dockerfile.dev"
+		"docker:build:dev": "docker build -t jvik/sundbaat-api . -f Dockerfile.dev"
 	},
 	"keywords": [],
 	"author": "",
