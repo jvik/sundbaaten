@@ -18,14 +18,27 @@ export default async function getSchedule(): Promise<any> {
 }
 
 export class Schedule {
-	public static async nextDeparture(): Promise<string> {
+	public static async nextDeparture(): Promise<any> {
 		const schedule = await getSchedule();
 		const departureTable = Utils.checkDepartureTable();
 
-		console.log(Utils.getWeekDay());
-
 		const relevantTable = schedule[departureTable];
 
-		return relevantTable;
+		const relevantDepartures = [];
+
+		for (let i = 0; i < relevantTable.length; i++) {
+			if (
+				relevantTable[i].departureTime > Utils.getTime() &&
+				relevantTable[i].departureSite === 'Kirkelandet'
+			) {
+				console.log(relevantTable[i]);
+				relevantDepartures.push(relevantTable[i]);
+				if (relevantDepartures.length > 0) {
+					break;
+				}
+			}
+		}
+
+		return relevantDepartures[0].departureTime;
 	}
 }

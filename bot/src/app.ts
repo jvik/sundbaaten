@@ -32,9 +32,9 @@ var bot = new SlackBot({
 	name: 'sundboten',
 });
 
-bot.on('start', function() {
-	bot.postMessageToChannel('slackbot-test', 'Hello');
-});
+// bot.on('start', function() {
+// 	bot.postMessageToChannel('slackbot-test', 'Hello');
+// });
 
 bot.on('error', err => console.log(err));
 
@@ -55,10 +55,7 @@ async function handleMessage(message) {
 	if (message.includes('klokkeslett')) {
 		bot.postMessageToChannel('slackbot-test', utils.getTime());
 	}
-	if (message.includes('schedule')) {
-		bot.postMessageToChannel(
-			'slackbot-test',
-			await Schedule.nextDeparture()
-		);
+	if (message.includes('neste sundbåt')) {
+		bot.postMessageToChannel('general', await Schedule.nextDeparture());
 	}
 }
