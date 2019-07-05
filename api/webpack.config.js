@@ -12,7 +12,7 @@ const entry = isProduction
 
 module.exports = {
 	mode: nodeEnv,
-	entry: entry,
+	entry: path.resolve(path.join(__dirname, './src/app.ts')),
 	externals: [nodeExternals()],
 	devtool: '#inline-source-map',
 	name: 'API',

@@ -15,9 +15,29 @@ export default class Utils {
 		weekday[3] = 'onsdag';
 		weekday[4] = 'torsdag';
 		weekday[5] = 'fredag';
-		weekday[6] = 'søndag';
+		weekday[6] = 'lørdag';
 		var dateToday = weekday[date.getDay()];
 
 		return dateToday;
+	}
+
+	public static checkDepartureTable() {
+		let departureTable = '';
+		switch (Utils.getWeekDay()) {
+			case 'søndag':
+				departureTable = 'sundayDepartures';
+				break;
+			case 'mandag':
+			case 'tirsdag':
+			case 'onsdag':
+			case 'torsdag':
+			case 'fredag':
+				departureTable = 'weekdayDepartures';
+				break;
+			case 'lørdag':
+				departureTable = 'saturdayDepartures';
+				break;
+		}
+		return departureTable;
 	}
 }

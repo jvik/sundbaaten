@@ -1,24 +1,33 @@
-version: '2'
+version: '3'
 services:
-  sundbaat-scraper:
+  sundbaat-api:
     container_name: sundbaat-api
     image: jvik/sundbaat-api
     restart: always
     command: ["npm", "start"]
+    networks:
+      - sundbaaten
     ports: 
       - 5555:5555
     volumes:
       - ./api/src:/app/src
       - ./api/dist/:/app/dist
-      - ./api/.env.dev:/app/.env
+      - ./api/.env.dev:/app/.env.dev
     tty: true
   sundbaat-client:
     container_name: sundbaat-client
     image: jvik/sundbaat-client
     restart: always
+    depends_on:
+      - sundbaat-api
+    networks:
+      - sundbaaten
     command: ["npm", "start"]
     volumes:
       - ./bot/src:/app/src
       - ./bot/dist/:/app/dist
-      - ./bot/.env.dev:/app/.env
+      - ./bot/.env.dev:/app/.env.dev
     tty: true
+
+networks:
+  sundbaaten:

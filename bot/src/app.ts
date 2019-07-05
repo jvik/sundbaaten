@@ -1,6 +1,8 @@
 var SlackBot = require('slackbots');
 import dotenv from 'dotenv';
 import utils from './utils/utils';
+import getSchedule from './parser';
+import { Schedule } from './parser';
 
 var IN_PROD = false;
 
@@ -21,6 +23,10 @@ if (IN_PROD) {
 	});
 }
 
+async function postSchedule() {
+	await getSchedule();
+}
+
 var bot = new SlackBot({
 	token: `${process.env.API_KEY}`,
 	name: 'sundboten',
@@ -37,10 +43,9 @@ bot.on('message', data => {
 		return;
 	}
 	handleMessage(data.text);
-	console.log(data);
 });
 
-function handleMessage(message) {
+async function handleMessage(message) {
 	if (message.includes(' hello')) {
 		bot.postMessageToChannel('slackbot-test', 'hehehe');
 	}
@@ -49,5 +54,11 @@ function handleMessage(message) {
 	}
 	if (message.includes('klokkeslett')) {
 		bot.postMessageToChannel('slackbot-test', utils.getTime());
+	}
+	if (message.includes('schedule')) {
+		bot.postMessageToChannel(
+			'slackbot-test',
+			await Schedule.nextDeparture()
+		);
 	}
 }
