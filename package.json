@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "./dist/main.bundle.js",
 	"scripts": {
-		"start": "npm run dev:server",
+		"start": "ts-node src/app.ts",
 		"build:server:once": "cross-env NODE_ENV=development webpack --config webpack.config.js",
 		"dev:server": "npm run build:server:once && npm-run-all --parallel nodemon:prod watch:server",
 		"watch:server": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",

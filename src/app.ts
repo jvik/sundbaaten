@@ -45,7 +45,7 @@ bot.on('message', data => {
 async function handleMessage(message) {
 	const splitWords = message.split(' ');
 	if (message.includes('hello')) {
-		bot.postMessageToChannel('slackbot-test', console.log(await scraper));
+		bot.postMessageToChannel('slackbot-test', 'Hello');
 	}
 	if (message.includes('ukedag')) {
 		bot.postMessageToChannel('slackbot-test', utils.getWeekDay());
