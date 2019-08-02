@@ -1,14 +1,14 @@
 # sundbaaten
-Scraper &amp; JSON API for Sundbaaten. Just a small project for learning how to scrape with cheerio and request-promise.
+Scraper &amp; JSON API for Sundbåten in Kristiansund. Just a small project for learning how to scrape with cheerio and request-promise.
 
-Project can be started with the following command
+Start dev-server with
 ```shell
-$ npm start
+$ npm run dev:server
 ```
 
 If you have docker-compose installed you can use 
 ```shell
-$ docker build -t jvik/sundbaat-scraper .
+$ docker build -t sundbaat-scraper .
 ```
 Thereafter
 ```shell
