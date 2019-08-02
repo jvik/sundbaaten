@@ -7,6 +7,7 @@ import scraper from './scraper';
 import express from 'express';
 
 var IN_PROD = false;
+const host = '0.0.0.0';
 
 process.argv.forEach((val, index) => {
 	if (val === '-production') {
@@ -29,7 +30,7 @@ const app = express();
 
 app.get('/', (req, res) => res.send('Hello'));
 
-app.listen(process.env.APP_PORT, () =>
+app.listen(process.env.APP_PORT, host, () =>
 	console.log(`Slackbot is listening on port ${process.env.APP_PORT}`)
 );
 
