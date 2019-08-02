@@ -8,18 +8,13 @@ export class Schedule {
 		const departureTable = Utils.dayToTableConverter(Utils.getWeekDay());
 
 		const relevantTable = fullSchedule[departureTable];
+		console.log('TCL: Schedule -> relevantTable', relevantTable);
 
 		const relevantDepartures = [];
 
 		for (let i = 0; i < relevantTable.length; i++) {
-			if (
-				relevantTable[i].departureTime > Utils.getTime() &&
-				relevantTable[i].departureSite === 'Kirkelandet'
-			) {
+			if (relevantTable[i].departureTime > Utils.getTime() && relevantTable[i].departureSite === 'Kirkelandet') {
 				relevantDepartures.push(relevantTable[i]);
-				if (relevantDepartures.length > 0) {
-					break;
-				}
 			}
 		}
 
@@ -31,8 +26,6 @@ export class Schedule {
 		const relevantTable = Utils.dayToTableConverter(daytoday);
 
 		const relevantDepartures = schedule[relevantTable];
-
-		console.log(relevantDepartures);
 
 		for (let i = 0; i < relevantDepartures; i++) {}
 		return '';

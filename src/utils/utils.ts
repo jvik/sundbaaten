@@ -1,7 +1,9 @@
 export default class Utils {
 	public static getTime(): string {
 		const dateToday = new Date();
-		const timeNow = dateToday.getHours() + ':' + dateToday.getMinutes();
+		const currentHours = dateToday.getHours();
+		const currentHourswithPrefix = ('0' + currentHours).slice(-2);
+		const timeNow = currentHourswithPrefix + ':' + dateToday.getMinutes();
 		return timeNow;
 	}
 
@@ -42,12 +44,4 @@ export default class Utils {
 	}
 }
 
-export const dayOfTheWeek = [
-	'mandag',
-	'tirsdag',
-	'onsdag',
-	'torsdag',
-	'fredag',
-	'lørdag',
-	'søndag',
-];
+export const dayOfTheWeek = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
