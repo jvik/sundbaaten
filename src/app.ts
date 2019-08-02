@@ -4,6 +4,7 @@ import utils from './utils/utils';
 import { dayOfTheWeek } from './utils/utils';
 import { Schedule } from './parser';
 import scraper from './scraper';
+import express from 'express';
 
 var IN_PROD = false;
 
@@ -23,6 +24,14 @@ if (IN_PROD) {
 		path: './.env.dev',
 	});
 }
+
+const app = express();
+
+app.get('/', (req, res) => res.send('Hello'));
+
+app.listen(process.env.APP_PORT, () =>
+	console.log(`Slackbot is listening on port ${process.env.APP_PORT}`)
+);
 
 var bot = new SlackBot({
 	token: `${process.env.API_KEY}`,
@@ -45,18 +54,18 @@ bot.on('message', data => {
 async function handleMessage(message) {
 	const splitWords = message.split(' ');
 	if (message.includes('hello')) {
-		bot.postMessageToChannel('slackbot-test', 'Hello');
+		bot.postMessageToChannel('general', 'Hello');
 	}
 	if (message.includes('ukedag')) {
-		bot.postMessageToChannel('slackbot-test', utils.getWeekDay());
-	}
-	if (message.includes('klokkeslett')) {
-		bot.postMessageToChannel('slackbot-test', utils.getTime());
+		bot.postMessageToChannel(
+			'general',
+			`I dag er det ${utils.getWeekDay()}`
+		);
 	}
 	if (message.includes('sundbåt neste')) {
 		bot.postMessageToChannel(
-			'slackbot-test',
-			await Schedule.nextDeparture()
+			'general',
+			`Neste sundbåt har avgang ${await Schedule.nextDeparture()}`
 		);
 	}
 	if (
