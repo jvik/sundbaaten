@@ -21,9 +21,9 @@ export default class Utils {
 		return dateToday;
 	}
 
-	public static checkDepartureTable() {
+	public static dayToTableConverter(day: string) {
 		let departureTable = '';
-		switch (Utils.getWeekDay()) {
+		switch (day) {
 			case 'søndag':
 				departureTable = 'sundayDepartures';
 				break;
@@ -41,3 +41,13 @@ export default class Utils {
 		return departureTable;
 	}
 }
+
+export const dayOfTheWeek = [
+	'mandag',
+	'tirsdag',
+	'onsdag',
+	'torsdag',
+	'fredag',
+	'lørdag',
+	'søndag',
+];
