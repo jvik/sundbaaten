@@ -8,7 +8,6 @@ export class Schedule {
 		const departureTable = Utils.dayToTableConverter(Utils.getWeekDay());
 
 		const relevantTable = fullSchedule[departureTable];
-		console.log('TCL: Schedule -> relevantTable', relevantTable);
 
 		const relevantDepartures = [];
 

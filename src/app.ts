@@ -8,7 +8,7 @@ import express from 'express';
 
 var IN_PROD = false;
 const host = '0.0.0.0';
-
+const port = process.env.PORT || 3000;
 process.argv.forEach((val, index) => {
 	if (val === '-production') {
 		IN_PROD = true;
@@ -30,9 +30,7 @@ const app = express();
 
 app.get('/', (req, res) => res.send('Hello'));
 
-app.listen(process.env.APP_PORT || 5000, host, () =>
-	console.log(`Slackbot is listening on port ${process.env.APP_PORT}`)
-);
+app.listen(port, host, () => console.log(`Slackbot is listening on port ${port}`));
 
 var bot = new SlackBot({
 	token: `${process.env.API_KEY}`,
