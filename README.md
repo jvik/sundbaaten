@@ -14,3 +14,6 @@ Thereafter
 ```shell
 $ docker-compose up
 ```
+
+
+![Sundbåten](https://pbs.twimg.com/profile_images/776499046/Angvik.jpg)
