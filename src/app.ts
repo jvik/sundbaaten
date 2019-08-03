@@ -28,6 +28,8 @@ if (IN_PROD) {
 
 const app = express();
 
+app.set('port', process.env.PORT || 5000);
+
 app.get('/', (req, res) => res.send('Hello'));
 
 app.listen(process.env.APP_PORT, host, () => console.log(`Slackbot is listening on port ${process.env.APP_PORT}`));
