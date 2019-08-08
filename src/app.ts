@@ -5,6 +5,9 @@ import { dayOfTheWeek } from './utils/utils';
 import { Schedule } from './parser';
 import scraper from './scraper';
 import express from 'express';
+import sourceMapSupport from 'source-map-support';
+
+sourceMapSupport.install();
 
 var IN_PROD = false;
 const host = '0.0.0.0';
@@ -62,12 +65,22 @@ async function handleMessage(message) {
 		bot.postMessageToChannel('general', `I dag er det ${utils.getWeekDay()}`);
 	}
 	// Tester
-	if (message && message.includes('test')) {
-		bot.postMessageToChannel('slackbot-test', `Neste sundbåt har avgang ${await Schedule.nextDeparture()}`);
+	if (message && message.includes('test neste')) {
+		const wordsArray = message.split(' ');
+		const departureDay = wordsArray[2];
+		bot.postMessageToChannel(
+			'slackbot-test',
+			`Neste sundbåt har avgang ${await Schedule.nextDeparture(departureDay)}`
+		);
 	}
 
 	if (message && message.includes('sundbåt neste')) {
-		bot.postMessageToChannel('general', `Neste sundbåt har avgang ${await Schedule.nextDeparture()} fra Innlandet`);
+		const wordsArray = message.split(' ');
+		const departureDay = wordsArray[2];
+		bot.postMessageToChannel(
+			'general',
+			`Neste sundbåt har avgang ${await Schedule.nextDeparture(departureDay)} fra ${departureDay}`
+		);
 	}
 	if (message && message.includes('sundbåt') && dayOfTheWeek.indexOf(splitWords[1]) > 0) {
 		bot.postMessageToChannel('slackbot-test', await Schedule.allDepartures(splitWords[1]));
