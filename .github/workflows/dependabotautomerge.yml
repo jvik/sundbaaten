@@ -6,6 +6,9 @@ on:
 jobs:
   worker:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
     if: github.actor == 'dependabot[bot]'
     steps:
@@ -24,4 +27,4 @@ jobs:
               repo: context.payload.repository.name,
               pull_number: context.payload.pull_request.number
             })
-          github-token: ${{secrets.ACCESS_TOKEN}}
+          github-token: ${{secrets.GITHUB_TOKEN}}
